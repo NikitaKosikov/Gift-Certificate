@@ -1,0 +1,48 @@
+server:
+  port: 8081
+
+spring:
+  mvc:
+    locale: ru
+  profiles: dev
+  h2:
+    console:
+      enabled: true
+  datasource:
+    url: jdbc:h2:mem:dev_database
+    driver-class-name: org.h2.Driver
+    schema: classpath:database-config/schema.sql
+    data: classpath:database-config/data.sql
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    open-in-view: true
+    show-sql: true
+    defer-datasource-initialization: true
+    hibernate:
+      ddl-auto: none
+  sql:
+    init:
+      platform: h2
+      mode: embedded
+  data:
+    web:
+      pageble:
+        default-page-size: 30
+        size-parameter: size
+        one-indexed-parameters: true
+    rest:
+      page-param-name: page
+  security:
+    oauth2:
+      client:
+        registration:
+          springboot-keycloak:
+            client-id: springboot-keycloak
+            client-secret: 57c0693d-cb90-4662-abaa-d5590d826ad6
+            scope: openid
+            authorization-grant-type: authorization_code
+            redirect-uri: http://localhost:8081/gift-certificates
+        provider:
+          springboot-keycloak:
+            issuer-uri: http://localhost:8180/auth/realms/Gift-Certificate
+

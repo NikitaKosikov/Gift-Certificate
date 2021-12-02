@@ -1,0 +1,10 @@
+spring:
+  profiles:
+    active: dev
+
+jwt:
+  header:
+    authorization: Authorization
+  secretKey: secret
+  expirationToken: 604800
+
